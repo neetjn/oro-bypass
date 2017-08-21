@@ -6,7 +6,7 @@ Hack::Hack(DWORD address, std::string enabled, std::string disabled)
 	this->active = false;
 	this->address = address;
 	this->enabled = enabled;
-	this ->disabled = disabled;
+	this->disabled = disabled;
 
 }
 
@@ -18,16 +18,15 @@ void Hack::toggle()
 	else
 		memapi::write(this->address, this->enabled);
 
-  this->active = !this->active;
+	this->active = !this->active;
 
 }
 
 void Oro::init()
 {
 
-	while (FindWindow("Rumble Fighter", "Rumble Fighter") == NULL) {
+	while (FindWindow("Rumble Fighter", "Rumble Fighter") == NULL)
 		Sleep(2500);
-	}
 
 	DWORD dw_min = 0x400000;
 	DWORD dw_max = 0x7FFFFF;
@@ -54,13 +53,13 @@ void Oro::bypass()
 {
 
 	if (this->initialized)
-  {
-		memapi::write(this->gg_window_check, "EB"); // # skip
-		memapi::write(this->gg_falsified, "EB 3A"); // # route to no errors detected
-		memapi::write(this->gg_hack_detected, "EB 41"); // # route to no errors detected
-		memapi::write(this->gg_init, "E9 AA 00 00 00 90 90"); // # route to no errors detected
+	{
+		memapi::write(this->gg_window_check, "EB");  // # skip
+		memapi::write(this->gg_falsified, "EB 3A");  // # route to no errors detected
+		memapi::write(this->gg_hack_detected, "EB 41");  // # route to no errors detected
+		memapi::write(this->gg_init, "E9 AA 00 00 00 90 90");  // # route to no errors detected
 		memapi::write(this->gg_speed_hack, "EB 63 90 90 90 8D 8D FC FE");
-		memapi::write(this->gg_unhandeled_exception, "E9 B1 00 00 00 90 90"); // # route to no errors detected
+		memapi::write(this->gg_unhandeled_exception, "E9 B1 00 00 00 90 90");  // # route to no errors detected
 	}
 
 }

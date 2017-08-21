@@ -13,29 +13,32 @@ namespace speed {
 void MakePageWritable(unsigned long Address, unsigned long ulSize)
 {
 
-	MEMORY_BASIC_INFORMATION* mbi = new MEMORY_BASIC_INFORMATION;
-	VirtualQuery((void*)Address, mbi, ulSize);
+	MEMORY_BASIC_INFORMATION *mbi = new MEMORY_BASIC_INFORMATION;
+	VirtualQuery((void *)Address, mbi, ulSize);
 	if (mbi->Protect != PAGE_EXECUTE_READWRITE)
 	{
-		unsigned long* ulProtect = new unsigned long;
-		VirtualProtect((void*)Address, ulSize, PAGE_EXECUTE_READWRITE, ulProtect);
+		unsigned long *ulProtect = new unsigned long;
+		VirtualProtect((void *)Address, ulSize, PAGE_EXECUTE_READWRITE, ulProtect);
 		delete ulProtect;
 	}
 	delete mbi;
 
 }
 
-bool Jump(unsigned long Address, void* Function)
+bool Jump(unsigned long Address, void *Function)
 {
 
 	__try
 	{
 		MakePageWritable(Address, 5);
-		*(unsigned char*)Address = 0xE9;
-		*(unsigned long*)(Address + 1) = ((int)Function - Address) - 5;
+		*(unsigned char *)Address = 0xE9;
+		*(unsigned long *)(Address + 1) = ((int)Function - Address) - 5;
 		return true;
 	}
-	__except (EXCEPTION_EXECUTE_HANDLER) { return false; }
+	__except (EXCEPTION_EXECUTE_HANDLER)
+	{
+		return false;
+	}
 
 }
 
@@ -53,7 +56,6 @@ void speed::tick()
 		tick_count += sleep_time * acceleration;
 		performance_count += (long long)(performance_sleep_time * acceleration);
 	}
-
 }
 
 int WINAPI speed::new_tick_count()
@@ -61,7 +63,7 @@ int WINAPI speed::new_tick_count()
 	return (int)tick_count;
 }
 
-BOOL WINAPI speed::new_query_performance_counter(LARGE_INTEGER* Count)
+BOOL WINAPI speed::new_query_performance_counter(LARGE_INTEGER *Count)
 {
 	Count->QuadPart = performance_count;
 	return TRUE;

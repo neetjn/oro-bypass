@@ -4,7 +4,7 @@
 
 namespace memapi {
 
-	#define ROUND_UP(p, align)   (((DWORD)(p) + (align)-1) & ~((align)-1))
+	#define ROUND_UP(p, align) (((DWORD)(p) + (align)-1) & ~((align)-1))
 	#define ROUND_DOWN(p, align) ((DWORD)(p) & ~((align)-1))
 
 	int __stdcall write(DWORD dw_address, std::string write_buffer);
@@ -22,4 +22,5 @@ namespace memapi {
 		void write_float(unsigned long base, unsigned long offset, float value);
 
 	}
-};
+
+}
