@@ -32,11 +32,11 @@ void Oro::init()
 	DWORD dw_max = 0x7FFFFF;
 
 	this->gg_window_check = scanner::find_pattern(
-		dw_min, dw_max, "74 77 8B 15 A8 BC 72 00"
-	);
+		dw_min, dw_max, "3D 55 07 00 00 74 77 8B 15 ? ? ? 00 A1"
+	) + 0x5;
 
 	DWORD gg_check_sub = scanner::find_pattern(
-		dw_min, dw_max, "55 8B EC 81 EC 08 02 00 00 A1 30 2C 7C 00 33 C5"
+		dw_min, dw_max, "55 8B EC 81 EC 08 02 00 00 A1 ? ? 7C 00 33 C5"
 	); // # get base address for gameguard check subroutine
 
 	this->gg_falsified = gg_check_sub + 0x110;
