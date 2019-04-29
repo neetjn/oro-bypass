@@ -35,7 +35,7 @@ DWORD scanner::find_pattern(DWORD dw_start, DWORD dw_end, const char *pattern, i
 				pat = pattern;
 				match = 0;
 			}
-			
+
 		}
 		_except(EXCEPTION_EXECUTE_HANDLER) {}
 	}

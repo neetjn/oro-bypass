@@ -23,5 +23,5 @@ BOOL WINAPI DllMain(__in::HMODULE hModule, __in::DWORD dwReason, __in __reserved
 	}
 
 	return TRUE;
-	
+
 }

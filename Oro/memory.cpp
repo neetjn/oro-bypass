@@ -90,5 +90,5 @@ void memapi::pointer::write_float(unsigned long base, unsigned long offset, floa
 
 	if (valid(base, offset))
 		*(float *)(*(unsigned long *)base + offset) = value;
-		
+
 }

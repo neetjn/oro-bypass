@@ -96,6 +96,6 @@ void Oro::bypass()
         system(cmd.c_str());
       }
     }
-  } 
+  }
 
 }
