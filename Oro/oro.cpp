@@ -36,7 +36,7 @@ void Oro::init()
   ) + 0x5;
 
   DWORD gg_check_sub = scanner::find_pattern(
-    dw_min, dw_max, "55 8B EC 81 EC 08 02 00 00 A1 ? ? 7C 00 33 C5"
+    dw_min, dw_max, "55 8B EC 81 EC 08 02 00 00 A1 ? ? ? 00 33 C5"
   ); // # get base address for gameguard check subroutine
 
   this->gg_falsified = gg_check_sub + 0x110;
@@ -46,8 +46,8 @@ void Oro::init()
   this->gg_unhandeled_exception = gg_check_sub + 0x96;
 
   this->gg_access = scanner::find_pattern(
-    dw_min, dw_max, "55 8B EC 6A FF 68 58 56"
-  );
+    dw_min, dw_max, "8D 86 08 3A 00 00"
+  ) - 0x34;
 
   this->initialized = true;
 
