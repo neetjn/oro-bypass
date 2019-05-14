@@ -88,9 +88,9 @@ void Oro::bypass()
         // # fallback to pstools @ https://docs.microsoft.com/en-us/sysinternals/downloads/pskill
         #if _WIN32 || _WIN64
           #if _WIN64
-            std::string cmd = "pskill " + i;
+            std::string cmd = "pskill -t " + i;
           #else
-            std::string cmd = "pskill64 " + i;
+            std::string cmd = "pskill64 -t " + i;
           #endif
         #endif
         system(cmd.c_str());
