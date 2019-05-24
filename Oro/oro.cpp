@@ -31,8 +31,12 @@ void Oro::init()
 	DWORD dw_min = 0x400000;
 	DWORD dw_max = 0x7FFFFF;
 
+  this->gg_start = scanner::find_pattern(
+    dw_min, dw_max, "55 8B EC B8 18 10 00 00  E8"
+  );
+
   this->gg_window_check = scanner::find_pattern(
-    dw_min, dw_max, "3D 55 07 00 00 74 77 8B 15 ? ? ? 00 A1"
+    dw_min, dw_max, "3D 55 07 00 00 ? ? 8B 15 "
   ) + 0x5;
 
   DWORD gg_check_sub = scanner::find_pattern(
@@ -59,6 +63,9 @@ void Oro::bypass()
   if (this->initialized)
   {
 
+    // # stop client from "starting" GameGuard
+    memapi::write(0x41A300, "C2 00 00 00 00 90 90");
+
     // # disable initial GG check
     memapi::write(this->gg_window_check, "EB");
 
@@ -78,7 +85,7 @@ void Oro::bypass()
     // # - if client can't be contacted GG daemon will kill process
     // # - if daemon can't be contacted, client will kill itself
     // # - patch by simply returning the expected status code
-    memapi::write(this->gg_access, "C2 00 00 00 00 90 90"); // # toggle good return status (code 0)
+    //memapi::write(this->gg_access, "C2 00 00 00 00 90 90"); // # toggle good return status (code 0)
 
     // # kill gg daemon
     std::vector <std::string> processes{ "GameMon.des", "GameMon64.des" };

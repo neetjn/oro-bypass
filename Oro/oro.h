@@ -20,7 +20,8 @@ class Oro
 {
 private:
 	bool initialized = false;
-  DWORD gg_window_check, gg_falsified, gg_hack_detected, gg_init, gg_speed_hack, gg_unhandeled_exception, gg_access;
+  DWORD gg_window_check, gg_falsified, gg_hack_detected, gg_init, gg_speed_hack, gg_unhandeled_exception, gg_access,
+        gg_start;
 
 public:
 	void init();
